@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <unistd.h>
 
+#define G_MAX_WIDTH 20
+#define G_MAX_HEIGHT 20
+#define G_MIN_WIDTH 0
+#define G_MIN_HEIGHT 20
+
 typedef struct
 {
     int x_position;
@@ -11,7 +16,7 @@ typedef struct
 }
 ball;
 
-void logic(ball *ball)
+void logic(ball *ball, int MAX_WIDTH, int MAX_HEIGHT, int MIN_WIDTH, int MIN_HEIGHT)
 {
     if(ball->x_position <= 1)
     {
