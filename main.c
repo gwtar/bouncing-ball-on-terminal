@@ -18,15 +18,19 @@ void screen_clear()
     printf("\033[H\033[2J");
 }
 
-void object_detection(object object, int i, int j)
+void object_detection_and_border(object object, int i, int j) // oh god Im bad at making function
 {
     if(j == object.posx && i == object.posy)
     {
         printf("%c", object.character);
     }
-    else
+    else if(j == 0 || j == ROWS - 1 || i == 0 || i == COLUMNS - 1)
     {
         printf("#");
+    }
+    else
+    {
+        printf("-");
     }
 }
 
@@ -38,7 +42,7 @@ void draw(object object)
     {
         for(int j = 0; j < ROWS; j++)
         {
-            object_detection(object, i, j);
+            object_detection_and_border(object, i, j);
         }
 
         printf("\n");
@@ -47,25 +51,25 @@ void draw(object object)
 
 void logic(object *object)
 {
-    if(object->posx >= ROWS)
+    if(object->posx >= ROWS - 2)
     {
-        object->posx = ROWS;
+        object->posx = ROWS - 2; // if the object goes out of bound
         object->speedx *= -1;
     }
-    if(object->posx <= 0)
+    if(object->posx <= 1)
     {
-        object->posx = 0;
+        object->posx = 1;
         object->speedx *=-1;
     }
 
-    if(object->posy >= COLUMNS)
+    if(object->posy >= COLUMNS - 2)
     {
-        object->posy = COLUMNS;
+        object->posy = COLUMNS - 2;
         object->speedy *= -1;
     }
-    if(object->posy <= 0)
+    if(object->posy <= 1)
     {
-        object->posy = 0;
+        object->posy = 1;
         object->speedy *=-1;
     }
 
